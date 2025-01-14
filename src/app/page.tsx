@@ -1,41 +1,33 @@
 'use client';
-// app/page.js
-
+import { connectOpenAi } from './actions';
 import { useState } from 'react';
 
 export default function HomePage() {
   const [podcast, setPodcast] = useState();
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(e.target[0].value);
+  const handleSubmit = async (formData) => {
+    console.log('triggered');
+    try {
+      const result = await connectOpenAi(formData);
+      console.log('result', result);
+      console.log(
+        result,
+        '&&&&&&&&&&&&&&',
+        result.message.choices[0].message.content
+      );
 
-    const prompt = e.target[0].value;
-
-    const res = await fetch('/api/openai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt }),
-    });
-    const data = await res.json();
-
-    console.log('Data:', data);
-
-    console.log('podcast string', data.choices[0].message.content);
-
-    const response = await JSON.parse(data.choices[0].message.content);
-
-    setPodcast(response);
+      setPodcast(await JSON.parse(result.message.choices[0].message.content));
+      setErrorMessage('');
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
-  console.log(podcast);
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type='text' placeholder='Enter your prompt' />
+    <>
+      <form action={handleSubmit}>
+        <input name='prompt' placeholder='Enter your prompt' />
         <button type='submit'>Submit</button>
       </form>
       {podcast && (
@@ -47,8 +39,9 @@ export default function HomePage() {
               {message.host}: {message.message}
             </p>
           ))}
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </div>
       )}
-    </div>
+    </>
   );
 }
