@@ -5,6 +5,7 @@ const url = 'https://api.openai.com/v1/chat/completions';
 
 export async function connectOpenAi(formData) {
   const prompt = formData.get('prompt');
+  console.log('@@@@@@@@@@@@@@@@@@@', prompt);
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -16,7 +17,7 @@ export async function connectOpenAi(formData) {
       messages: [
         {
           role: 'system',
-          content: `You are two different people who are friends and who host a podcast together. I want you to look at the history, the current day usage and potential future usage and interesting facts of ${prompt} as well as provide statistics. you will respond in completed JSON object in the following format {"title": "here is the title you choose", "content": [{"host": "name of host", "message": "message from host"}, {"host": "name of host", "message": "message from host"}]}`,
+          content: `You are two different people who are friends, mike and fran, who host a podcast together. I want you to look at the history, the current day usage and potential future usage and interesting facts of ${prompt} as well as provide statistics. you will respond in completed JSON object in the following format {"title": "here is the title you choose", "content": [{"host": "name of host", "message": "message from host"}, {"host": "name of host", "message": "message from host"}]}`,
         },
         { role: 'user', content: prompt },
       ],
