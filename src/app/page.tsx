@@ -12,27 +12,24 @@ export default function HomePage() {
 
   const handleSubmit = async (formData) => {
     try {
-      console.log(formData);
       const resultAi = await connectOpenAi(formData);
-      console.log(resultAi);
       const podcastObject = await JSON.parse(
         resultAi.message.choices[0].message.content
       );
-      console.log('***********', podcastObject);
-      handleGenerate(podcastObject);
+      await handleGenerateVoice(podcastObject.content);
       setPodcast(podcastObject);
-      // setErrorMessage('');
+      setErrorMessage('');
     } catch (error) {
-      // setErrorMessage(error.message);
+      setErrorMessage(error.message);
     }
   };
 
-  const handleGenerate = async (text) => {
-    if (!text) {
-      alert('Please enter some text.');
+  const handleGenerateVoice = async (podcastArray) => {
+    if (!podcastArray) {
+      alert('Please enter some podcastArray.');
       return;
     }
-    console.log('generate speech:::::::::::::::::', text);
+    console.log('generate speech:::::::::::::::::', podcastArray);
     setLoading(true);
     setAudioUrl(null);
     try {
@@ -41,7 +38,7 @@ export default function HomePage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ podcastArray }),
       });
 
       if (!response.ok) {
@@ -86,39 +83,3 @@ export default function HomePage() {
     </>
   );
 }
-
-// export default function Home() {
-
-//   return (
-//     <div>
-//       <h1>Text-to-Speech with ElevenLabs</h1>
-//       <textarea
-//         rows='4'
-//         placeholder='Enter text here...'
-//         value={text}
-//         onChange={(e) => setText(e.target.value)}
-//         style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
-//       />
-//       <button
-//         onClick={handleGenerate}
-//         disabled={loading}
-//         style={{
-//           padding: '10px 20px',
-//           backgroundColor: '#0070f3',
-//           color: 'white',
-//           border: 'none',
-//           cursor: 'pointer',
-//         }}
-//       >
-//         {loading ? 'Generating...' : 'Generate Audio'}
-//       </button>
-
-//       {audioUrl && (
-//         <div style={{ marginTop: '20px' }}>
-//           <h2>Generated Audio</h2>
-//           <audio controls src={audioUrl}></audio>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
