@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,3 +21,33 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+@import url('@/app/components/skeleton.css');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.textbox {
+  background-color: red;
+  padding: 4px;
+  margin: 10px;
+  display: flex;
+  border-radius: 15px;
+}
+
+.avatar {
+  border-radius: 100%;
+  margin: 5px;
+}
+
+.Mike {
+  background-color: rgb(215, 138, 138);
+  color: white;
+}
+
+.Fran {
+  background-color: rgb(134, 134, 215);
+  color: white;
+}
