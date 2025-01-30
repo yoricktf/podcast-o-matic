@@ -1,0 +1,57 @@
+/* styles/SkeletonLoader.css */
+.skeleton-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.skeleton-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 10px;
+  align-items: center;
+}
+.skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.skeleton {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: skeleton-loading 1.5s infinite ease-in-out;
+}
+
+.skeleton-image {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  flex-shrink: 0;
+}
+
+.right {
+  flex-direction: row-reverse;
+}
+
+.skeleton-text {
+  height: 20px;
+  width: 100%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
