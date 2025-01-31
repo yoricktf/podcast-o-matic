@@ -17,28 +17,40 @@ export default function HomePage() {
           formData
         );
 
-        if (success) {
+        console.log('Podcast Object:', podcastObject); // Debugging
+        console.log('Audio Base64:', audioBase64 ? 'Exists' : 'Missing'); // Debugging
+
+        if (success && podcastObject) {
           setPodcast(podcastObject);
 
-          // Convert base64 to a Blob URL
-          const audioBlob = new Blob(
-            [
-              new Uint8Array(
-                atob(audioBase64)
-                  .split('')
-                  .map((char) => char.charCodeAt(0))
-              ),
-            ],
-            { type: 'audio/mpeg' }
-          );
-          const url = URL.createObjectURL(audioBlob);
-          setAudioUrl(url);
+          if (audioBase64) {
+            try {
+              const audioBlob = new Blob(
+                [
+                  new Uint8Array(
+                    atob(audioBase64)
+                      .split('')
+                      .map((char) => char.charCodeAt(0))
+                  ),
+                ],
+                { type: 'audio/mpeg' }
+              );
+              const url = URL.createObjectURL(audioBlob);
+              setAudioUrl(url);
+            } catch (audioError) {
+              console.error('Error decoding base64 audio:', audioError);
+              setErrorMessage('Failed to process audio data.');
+            }
+          } else {
+            setErrorMessage('Audio data is missing.');
+          }
 
           setErrorMessage('');
         } else {
-          throw new Error('Failed to generate podcast or audio');
+          throw new Error('Invalid podcast data received.');
         }
       } catch (error) {
+        console.error('Error generating podcast:', error);
         setErrorMessage(error.message);
       }
     });
