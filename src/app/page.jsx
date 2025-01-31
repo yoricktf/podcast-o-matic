@@ -13,12 +13,16 @@ export default function HomePage() {
   const handleSubmit = async (formData) => {
     startTransition(async () => {
       try {
-        const { success, podcastObject, audioBase64 } = await generatePodcast(
-          formData
-        );
+        const result = await generatePodcast(formData);
 
-        console.log('Podcast Object:', podcastObject); // Debugging
-        console.log('Audio Base64:', audioBase64 ? 'Exists' : 'Missing'); // Debugging
+        console.log('API Response:', result); // Log full response
+        if (!result) throw new Error('No response from generatePodcast');
+
+        const { success, podcastObject, audioBase64 } = result;
+
+        console.log('Success:', success);
+        console.log('Podcast Object:', podcastObject);
+        console.log('Audio Base64:', audioBase64 ? 'Exists' : 'Missing');
 
         if (success && podcastObject) {
           setPodcast(podcastObject);
@@ -44,8 +48,6 @@ export default function HomePage() {
           } else {
             setErrorMessage('Audio data is missing.');
           }
-
-          setErrorMessage('');
         } else {
           throw new Error('Invalid podcast data received.');
         }
