@@ -10,7 +10,6 @@ export async function generatePodcast(formData) {
   const prompt = formData.get('prompt');
 
   try {
-    // Step 1: Generate podcast script using OpenAI
     const response = await fetch(openAiUrl, {
       method: 'POST',
       headers: {
@@ -22,7 +21,7 @@ export async function generatePodcast(formData) {
         messages: [
           {
             role: 'system',
-            content: `Imagine you are writing a podcast script featuring two hosts, Mike and Fran, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Include humor, relatable anecdotes, and a friendly tone. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }. the host should only respond once max 20 words`,
+            content: `Imagine you are writing a podcast script featuring two hosts, Mike and Fran, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Include humor and a friendly tone. Mike is a teacher and historian and very good with languages, Fran is a passionate and empathetic individual with a kind heart, driven by facts. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
           },
           { role: 'user', content: prompt },
         ],
@@ -33,7 +32,6 @@ export async function generatePodcast(formData) {
     const data = await response.json();
     const podcastObject = JSON.parse(data.choices[0].message.content);
 
-    // Step 2: Generate audio using ElevenLabs
     const elevenlabs = new ElevenLabsClient({
       apiKey: elevenLabsApiKey,
     });
@@ -47,11 +45,12 @@ export async function generatePodcast(formData) {
         throw new Error('Each segment must have a host and message');
       }
 
-      const voice = host === 'Mike' ? 'Charlie' : 'Sarah';
+      const voice =
+        host === 'Mike' ? '8s01jph49qpKh4ip8fXs' : 'FTkbXYvnvb2aWwldpPRj';
       const audioStream = await elevenlabs.generate({
         voice,
         text: message,
-        model_id: 'eleven_multilingual_v2',
+        model_id: 'eleven_flash_v2_5',
       });
 
       const audioBuffer = await streamToBuffer(audioStream);
@@ -60,7 +59,6 @@ export async function generatePodcast(formData) {
 
     const combinedAudio = Buffer.concat(audioBuffers);
 
-    // Convert the audio buffer to a base64 string
     const audioBase64 = combinedAudio.toString('base64');
 
     return { success: true, podcastObject, audioBase64 };

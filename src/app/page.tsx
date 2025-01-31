@@ -46,14 +46,30 @@ export default function HomePage() {
 
   return (
     <>
+      <div className='container'>
+        <section className='banner'>
+          <h1 className='title'>Podcast-o-Matic</h1>
+          <h3>🎙️✨ Instant Podcasts on Any Topic! 🎙️✨</h3>
+          <p>
+            Meet Mike and Fran, your AI-powered podcast hosts who are ready to
+            tackle any topic you throw their way! Just enter a subject, and
+            they’ll generate a fully scripted, engaging podcast episode—ready
+            for you to read or listen to. Whether it’s deep dives into history,
+            tech trends, or the wildest conspiracy theories, Mike and Fran
+            deliver entertaining and insightful discussions in seconds. 🚀
+            Instant. Custom. Unlimited. What will you make them talk about next?
+          </p>
+        </section>
+      </div>
+
       <form action={handleSubmit}>
         <input name='prompt' placeholder='Enter your prompt' />
         <button type='submit' disabled={isPending}>
           Submit
         </button>
       </form>
-      {isPending && <SkeletonLoader />}
 
+      <h1>Your Podcast</h1>
       {podcast && (
         <div>
           <h1>{podcast?.title}</h1>
@@ -72,6 +88,7 @@ export default function HomePage() {
               </p>
             </div>
           ))}
+
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </div>
       )}
@@ -81,6 +98,7 @@ export default function HomePage() {
           <audio controls src={audioUrl}></audio>
         </div>
       )}
+      {isPending && <SkeletonLoader />}
     </>
   );
 }

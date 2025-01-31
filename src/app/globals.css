@@ -25,16 +25,50 @@ body {
 @import url('@/app/components/skeleton.css');
 
 * {
+  /* max-width: 1200px; */
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+  background-color: rgb(64, 186, 186);
+  height: 100vh;
+}
+
+.banner {
+  display: flex;
+  width: 100vw;
+  max-width: 1200px;
+}
+
+form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 10px auto;
+  width: 100%;
+  max-width: 600px;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .textbox {
-  background-color: red;
   padding: 4px;
   margin: 10px;
   display: flex;
   border-radius: 15px;
+}
+button {
+  margin: 0 auto;
+  padding: 10px 100px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(9, 7, 7);
+  border-radius: 5px;
+  font-size: 1.2rem;
 }
 
 .avatar {
@@ -50,4 +84,8 @@ body {
 .Fran {
   background-color: rgb(134, 134, 215);
   color: white;
+}
+
+.title {
+  font-size: 3rem;
 }
