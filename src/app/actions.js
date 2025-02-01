@@ -7,8 +7,9 @@ const elevenLabsApiKey = process.env.ELEVENLABS_API_KEY;
 const openAiUrl = 'https://api.openai.com/v1/chat/completions';
 
 export async function generatePodcast(formData) {
+  console.log('Generating podcast with form data:', formData);
   const prompt = formData.get('prompt');
-
+  console.log('Prompt:', prompt);
   try {
     const response = await fetch(openAiUrl, {
       method: 'POST',
@@ -28,6 +29,7 @@ export async function generatePodcast(formData) {
         max_tokens: 5000,
       }),
     });
+    console.log('Response: ', response);
 
     const data = await response.json();
     const podcastObject = JSON.parse(data.choices[0].message.content);

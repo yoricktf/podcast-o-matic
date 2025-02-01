@@ -11,6 +11,7 @@ export default function HomePage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (formData) => {
+    console.log('Submitting Form Data:', formData);
     startTransition(async () => {
       try {
         const result = await generatePodcast(formData);
