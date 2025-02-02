@@ -24,7 +24,7 @@ const LoadingText = () => {
 
     const interval = setInterval(() => {
       setIndex((prevIndex) => prevIndex + 1);
-    }, 1000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [index]);
