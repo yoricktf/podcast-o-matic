@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import SkeletonLoader from './components/SkeletonLoader';
+import LoadingText from './components/LoadingText';
 import { generatePodcast } from './actions';
 import { useState, useTransition } from 'react';
 
@@ -11,6 +12,10 @@ export default function HomePage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (formData) => {
+    setPodcast(null);
+    setAudioUrl(null);
+    setErrorMessage('');
+    await new Promise((resolve) => setTimeout(resolve, 0));
     console.log('Submitting Form Data:', formData);
     startTransition(async () => {
       try {
@@ -61,21 +66,19 @@ export default function HomePage() {
 
   return (
     <>
-      <div className='container'>
-        <section className='banner'>
-          <h1 className='title'>Podcast-o-Matic</h1>
-          <h3>🎙️✨ Instant Podcasts on Any Topic! 🎙️✨</h3>
-          <p>
-            Meet Mike and Fran, your AI-powered podcast hosts who are ready to
-            tackle any topic you throw their way! Just enter a subject, and
-            they’ll generate a fully scripted, engaging podcast episode—ready
-            for you to read or listen to. Whether it’s deep dives into history,
-            tech trends, or the wildest conspiracy theories, Mike and Fran
-            deliver entertaining and insightful discussions in seconds. 🚀
-            Instant. Custom. Unlimited. What will you make them talk about next?
-          </p>
-        </section>
-      </div>
+      <section className='banner'>
+        <h1 className='title'>Podcast-o-Matic</h1>
+        <h3>🎙️✨ Instant Podcasts on Any Topic! 🎙️✨</h3>
+        <p>
+          Meet Mike and Fran, your AI-powered podcast hosts who are ready to
+          tackle any topic you throw their way! Just enter a subject, and
+          they’ll generate a fully scripted, engaging podcast episode—ready for
+          you to read or listen to. Whether it’s deep dives into history, tech
+          trends, or the wildest conspiracy theories, Mike and Fran deliver
+          entertaining and insightful discussions in seconds. 🚀 Instant.
+          Custom. Unlimited. What will you make them talk about next?
+        </p>
+      </section>
 
       <form action={handleSubmit}>
         <input name='prompt' placeholder='Enter your prompt' />
@@ -84,10 +87,9 @@ export default function HomePage() {
         </button>
       </form>
 
-      <h1>Your Podcast</h1>
-      {podcast && (
+      {!isPending && podcast && (
         <div>
-          <h1>{podcast?.title}</h1>
+          <h2>{podcast?.title}</h2>
 
           {podcast?.content?.map((message, index) => (
             <div className={`textbox ${message.host}`} key={index}>
@@ -98,7 +100,7 @@ export default function HomePage() {
                 height={50}
                 className='avatar'
               />
-              <p>
+              <p className='message'>
                 {message.host}: {message.message}
               </p>
             </div>
@@ -107,13 +109,18 @@ export default function HomePage() {
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </div>
       )}
-      {audioUrl && (
-        <div style={{ marginTop: '20px' }}>
+      {!isPending && audioUrl && (
+        <div className='audio-container'>
           <h2>Your Personal Podcast</h2>
-          <audio controls src={audioUrl}></audio>
+          <audio style={{ margin: '20px' }} controls src={audioUrl}></audio>
         </div>
       )}
-      {isPending && <SkeletonLoader />}
+      {isPending && (
+        <>
+          <LoadingText />
+          <SkeletonLoader />
+        </>
+      )}
     </>
   );
 }
