@@ -26,26 +26,40 @@ body {
 
 * {
   /* max-width: 1200px; */
+  text-align: center;
   box-sizing: border-box;
   margin: 0 auto;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.container {
-  background-color: rgb(64, 186, 186);
-  height: 100vh;
-}
-
-.banner {
-  display: flex;
-  width: 100vw;
-  max-width: 1200px;
 }
 
 form {
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px auto;
+  padding: 5px;
+  max-width: 1200px;
+}
+
+.banner > p,
+.banner > h3 {
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+}
+
+form {
+  margin: 5px;
 }
 
 input {
@@ -58,17 +72,26 @@ input {
 
 .textbox {
   padding: 4px;
-  margin: 10px;
+  margin: 10px auto;
   display: flex;
   border-radius: 15px;
+  max-width: 800px;
 }
+
+.message {
+  text-align: left;
+
+  margin: 0;
+}
+
 button {
-  margin: 0 auto;
+  margin: 0 auto 20px;
   padding: 10px 100px;
   background-color: rgb(255, 255, 255);
   border: 2px solid rgb(9, 7, 7);
   border-radius: 5px;
   font-size: 1.2rem;
+  color: rgb(0, 0, 0);
 }
 
 .avatar {
@@ -88,4 +111,20 @@ button {
 
 .title {
   font-size: 3rem;
+}
+
+audio {
+  width: 100%;
+  max-width: 600px;
+  margin: 10px auto;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-container > p {
+  text-align: center;
+  padding: 20px;
 }
