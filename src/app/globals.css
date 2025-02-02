@@ -109,6 +109,11 @@ button {
   color: white;
 }
 
+.Yorick {
+  background-color: rgb(157, 215, 134);
+  color: white;
+}
+
 .title {
   font-size: 3rem;
 }

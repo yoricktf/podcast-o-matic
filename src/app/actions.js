@@ -22,7 +22,7 @@ export async function generatePodcast(formData) {
         messages: [
           {
             role: 'system',
-            content: `Imagine you are writing a podcast script featuring two hosts, Mike and Fran, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Include humor and a friendly tone. Mike is a teacher and historian and very good with languages, Fran is a passionate and empathetic individual with a kind heart, driven by facts. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
+            content: `Imagine you are writing a podcast script featuring three hosts,Yorick, Mike and Fran, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Mike is a teacher and historian and very good with languages, Fran is a passionate and empathetic individual with a kind heart, driven by facts. Yorick is a smart and witty individual who is always ready to learn. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
           },
           { role: 'user', content: prompt },
         ],
@@ -47,8 +47,16 @@ export async function generatePodcast(formData) {
         throw new Error('Each segment must have a host and message');
       }
 
-      const voice =
-        host === 'Mike' ? '8s01jph49qpKh4ip8fXs' : 'FTkbXYvnvb2aWwldpPRj';
+      const voices = {
+        Mike: '8s01jph49qpKh4ip8fXs',
+        Fran: 'FTkbXYvnvb2aWwldpPRj',
+        Yorick: 'z6WPXIzoeKjLoUepplxV',
+      };
+
+      const voice = voices[host] || 'defaultVoiceId';
+
+      // const voice =
+      //   host === 'Mike' ? '8s01jph49qpKh4ip8fXs' : 'FTkbXYvnvb2aWwldpPRj';
       const audioStream = await elevenlabs.generate({
         voice,
         text: message,
