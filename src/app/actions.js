@@ -22,7 +22,7 @@ export async function generatePodcast(formData) {
         messages: [
           {
             role: 'system',
-            content: `Imagine you are writing a podcast script featuring three hosts,Yorick, Mike and Fran, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Mike is a teacher and historian and very good with languages, Fran is a passionate and empathetic individual with a kind heart, driven by facts. Yorick is a smart and witty individual who is always ready to learn. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
+            content: `Imagine you are writing a podcast script featuring three hosts,Yorick, Mike and Fran, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
           },
           { role: 'user', content: prompt },
         ],
