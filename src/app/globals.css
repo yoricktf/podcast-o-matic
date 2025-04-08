@@ -114,9 +114,17 @@ button {
   color: white;
 }
 
+.Jens {
+  background-color: rgb(185, 134, 215);
+  color: white;
+}
+
 .title {
   font-size: 3rem;
 }
+
+/* .audio-container {
+} */
 
 audio {
   width: 100%;

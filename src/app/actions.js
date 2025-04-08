@@ -8,7 +8,9 @@ const openAiUrl = 'https://api.openai.com/v1/chat/completions';
 
 export async function generatePodcast(formData) {
   console.log('Generating podcast with form data:', formData);
+  let hosts = ['Yorick', 'Mike', 'Fran'];
   const prompt = formData.get('prompt');
+  hosts = formData.getAll('host');
   console.log('Prompt:', prompt);
   try {
     const response = await fetch(openAiUrl, {
@@ -22,7 +24,7 @@ export async function generatePodcast(formData) {
         messages: [
           {
             role: 'system',
-            content: `Imagine you are writing a podcast script featuring three hosts,Yorick, Mike and Fran, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
+            content: `Imagine you are writing a podcast script featuring three hosts,${hosts[0]}, ${hosts[1]} and ${hosts[2]}, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
           },
           { role: 'user', content: prompt },
         ],
@@ -51,6 +53,7 @@ export async function generatePodcast(formData) {
         Mike: '8s01jph49qpKh4ip8fXs',
         Fran: 'FTkbXYvnvb2aWwldpPRj',
         Yorick: 'z6WPXIzoeKjLoUepplxV',
+        Jens: 'NMTh6dE4GO7roOBPad1S',
       };
 
       const voice = voices[host] || 'defaultVoiceId';

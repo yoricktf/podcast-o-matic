@@ -70,19 +70,28 @@ export default function HomePage() {
         <h1 className='title'>Podcast-o-Matic</h1>
         <h3>🎙️✨ Instant Podcasts on Any Topic! 🎙️✨</h3>
         <p>
-          Meet Yorick, Mike and Fran, your AI-powered podcast hosts who are
-          ready to tackle any topic you throw their way! Just enter a subject,
-          and they’ll generate a fully scripted, engaging podcast episode—ready
-          for you to read or listen to. Whether it’s deep dives into history,
-          tech trends, or the wildest conspiracy theories,Yorick, Mike and Fran
-          deliver entertaining and insightful discussions in seconds. 🚀
-          Instant. Custom. Unlimited (while Yorick has credits). What will you
-          make them talk about next?
+          Meet Yorick, Mike, Jens and Fran, your AI-powered podcast hosts who
+          are ready to tackle any topic you throw their way! Just enter a
+          subject, and they’ll generate a fully scripted, engaging podcast
+          episode—ready for you to read or listen to. Whether it’s deep dives
+          into history, tech trends, or the wildest conspiracy theories,Yorick,
+          Mike, Jens and Fran deliver entertaining and insightful discussions in
+          seconds. 🚀 Instant. Custom. Unlimited (while Yorick has credits).
+          What will you make them talk about next?
         </p>
       </section>
 
       <form action={handleSubmit}>
         <input name='prompt' placeholder='Enter your prompt' />
+
+        <label htmlFor='host'>Choose a Host:</label>
+        <select id='host' name='host' size='4' multiple>
+          <option value='Yorick'>Yorick</option>
+          <option value='Jens'>Jens</option>
+          <option value='Fran'>Fran</option>
+          <option value='Mike'>Mike</option>
+        </select>
+
         <button type='submit' disabled={isPending}>
           Submit
         </button>
