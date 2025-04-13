@@ -1,27 +1,3 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
 @import url('@/app/components/skeleton.css');
 
 * {
@@ -99,24 +75,69 @@ button {
   margin: 5px;
 }
 
-.Mike {
-  background-color: rgb(215, 138, 138);
-  color: white;
+.pill-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
-.Fran {
-  background-color: rgb(134, 134, 215);
-  color: white;
+.pill-selector {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0 20px;
 }
 
-.Yorick {
-  background-color: rgb(157, 215, 134);
-  color: white;
+.pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
 }
 
-.Jens {
-  background-color: rgb(185, 134, 215);
+.pill input[type='checkbox'] {
+  display: none;
+}
+
+.pill.Mike {
+  --pill-bg: rgb(215, 138, 138);
+  --pill-shadow: rgba(215, 138, 138, 0.6);
+}
+
+.pill.Fran {
+  --pill-bg: rgb(134, 134, 215);
+  --pill-shadow: rgba(134, 134, 215, 0.6);
+}
+
+.pill.Yorick {
+  --pill-bg: rgb(157, 215, 134);
+  --pill-shadow: rgba(157, 215, 134, 0.6);
+}
+
+.pill.Jens {
+  --pill-bg: rgb(185, 134, 215);
+  --pill-shadow: rgba(185, 134, 215, 0.6);
+}
+
+.pill:hover {
+  background-color: color-mix(in srgb, var(--pill-bg) 60%, white);
+  /* border-color: var(--pill-bg); */
   color: white;
+  box-shadow: 0 0 10px var(--pill-shadow, transparent);
+}
+
+.pill:has(input[type='checkbox']:checked) {
+  background-color: var(--pill-bg);
+  border-color: var(--pill-bg);
+  color: white;
+  box-shadow: 0 0 28px -1px var(--pill-shadow, transparent);
 }
 
 .title {
@@ -140,4 +161,28 @@ audio {
 .loading-container > p {
   text-align: center;
   padding: 20px;
+}
+
+.textbox.Mike {
+  --pill-bg: rgb(215, 138, 138);
+  background-color: var(--pill-bg);
+  color: white;
+}
+
+.textbox.Fran {
+  --pill-bg: rgb(134, 134, 215);
+  background-color: var(--pill-bg);
+  color: white;
+}
+
+.textbox.Yorick {
+  --pill-bg: rgb(157, 215, 134);
+  background-color: var(--pill-bg);
+  color: white;
+}
+
+.textbox.Jens {
+  --pill-bg: rgb(185, 134, 215);
+  background-color: var(--pill-bg);
+  color: white;
 }

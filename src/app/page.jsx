@@ -81,7 +81,7 @@ export default function HomePage() {
         </p>
       </section>
 
-      <form action={handleSubmit}>
+      <form action={handleSubmit} style={{ margin: '0 auto' }}>
         <input name='prompt' placeholder='Enter your prompt' />
 
         <label htmlFor='host' className='pill-label'>
@@ -89,12 +89,12 @@ export default function HomePage() {
         </label>
         <div className='pill-selector'>
           {['Yorick', 'Jens', 'Fran', 'Mike'].map((host) => (
-            <label className='pill' key={host}>
+            <label className={`pill ${host}`} key={host}>
               <Image
                 src={`/${host}.jpg`}
                 alt={`${host}'s image`}
-                width={25}
-                height={25}
+                width={40}
+                height={40}
                 className='avatar'
               />
               <input type='checkbox' name='host' value={host} />
