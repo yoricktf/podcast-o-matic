@@ -40,7 +40,7 @@ form {
 
 input {
   margin: 10px auto;
-  width: 100%;
+  width: 90%;
   max-width: 600px;
   font-size: 1rem;
   text-align: center;
@@ -85,9 +85,26 @@ button {
   display: flex;
   flex-wrap: wrap;
   margin: 10px 0 20px;
+  justify-content: center;
 }
 
 .pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  margin: 5px; /* <-- add this line */
+  border-radius: 9999px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+/* .pill {
   position: relative;
 
   display: inline-flex;
@@ -101,7 +118,7 @@ button {
   cursor: pointer;
   border: 2px solid transparent;
   transition: all 0.2s ease-in-out;
-}
+} */
 
 .pill input[type='checkbox'] {
   display: none;

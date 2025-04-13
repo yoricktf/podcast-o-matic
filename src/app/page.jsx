@@ -85,7 +85,7 @@ export default function HomePage() {
         <input name='prompt' placeholder='Enter your prompt' />
 
         <label htmlFor='host' className='pill-label'>
-          Choose a Host:
+          Choose Hosts:
         </label>
         <div className='pill-selector'>
           {['Yorick', 'Jens', 'Fran', 'Mike'].map((host) => (
@@ -107,11 +107,6 @@ export default function HomePage() {
           Submit
         </button>
       </form>
-
-      <div className='audio-container'>
-        <h2>Your Personal Podcast</h2>
-        <audio style={{ margin: '20px' }} controls src={audioUrl}></audio>
-      </div>
 
       {!isPending && podcast && (
         <div>
