@@ -108,6 +108,11 @@ export default function HomePage() {
         </button>
       </form>
 
+      <div className='audio-container'>
+        <h2>Your Personal Podcast</h2>
+        <audio style={{ margin: '20px' }} controls src={audioUrl}></audio>
+      </div>
+
       {!isPending && podcast && (
         <div>
           <h2>{podcast?.title}</h2>

@@ -89,6 +89,7 @@ button {
 
 .pill {
   position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -144,13 +145,10 @@ button {
   font-size: 3rem;
 }
 
-/* .audio-container {
-} */
-
 audio {
-  width: 100%;
+  width: 90%;
+
   max-width: 600px;
-  margin: 10px auto;
 }
 
 .loading-container {
