@@ -8,10 +8,14 @@ const openAiUrl = 'https://api.openai.com/v1/chat/completions';
 
 export async function generatePodcast(formData) {
   console.log('Generating podcast with form data:', formData);
-  let hosts = ['Yorick', 'Mike', 'Fran'];
+
   const prompt = formData.get('prompt');
-  hosts = formData.getAll('host');
+  let hosts = formData.getAll('host');
+  if (!hosts || hosts.length === 0) {
+    hosts = ['Yorick', 'Mike', 'Fran'];
+  }
   console.log('Prompt:', prompt);
+  console.log('HOSTSHOSTS====', hosts);
   try {
     const response = await fetch(openAiUrl, {
       method: 'POST',
@@ -24,7 +28,18 @@ export async function generatePodcast(formData) {
         messages: [
           {
             role: 'system',
-            content: `Imagine you are writing a podcast script featuring three hosts,${hosts[0]}, ${hosts[1]} and ${hosts[2]}, who are experts in their fields but bring unique perspectives. They aim to break down ${prompt} in an engaging, conversational way. Respond in JSON format with { "title": "title", "content": [{ "host": "name", "message": "message" }] }.`,
+            content: `You are a podcast script generator that writes engaging, expert-level podcast conversations featuring hosts: ${hosts.join(
+              ', '
+            )}.
+            Always respond ONLY in valid JSON. Use this format:
+            {
+              "title": "Podcast Title.",
+              "content": [
+                { "host": "HostName", "message": "First message" },
+                { "host": "AnotherHost", "message": "Reply message" }
+              ]
+            }
+            Each host should speak multiple times, with natural and insightful messages (2–4 sentences each). The entire script should be around 3 minutes. The podcast should be engaging and informative.`,
           },
           { role: 'user', content: prompt },
         ],
@@ -58,8 +73,6 @@ export async function generatePodcast(formData) {
 
       const voice = voices[host] || 'defaultVoiceId';
 
-      // const voice =
-      //   host === 'Mike' ? '8s01jph49qpKh4ip8fXs' : 'FTkbXYvnvb2aWwldpPRj';
       const audioStream = await elevenlabs.generate({
         voice,
         text: message,
