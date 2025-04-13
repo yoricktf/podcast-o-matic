@@ -84,13 +84,24 @@ export default function HomePage() {
       <form action={handleSubmit}>
         <input name='prompt' placeholder='Enter your prompt' />
 
-        <label htmlFor='host'>Choose a Host:</label>
-        <select id='host' name='host' size='4' multiple>
-          <option value='Yorick'>Yorick</option>
-          <option value='Jens'>Jens</option>
-          <option value='Fran'>Fran</option>
-          <option value='Mike'>Mike</option>
-        </select>
+        <label htmlFor='host' className='pill-label'>
+          Choose a Host:
+        </label>
+        <div className='pill-selector'>
+          {['Yorick', 'Jens', 'Fran', 'Mike'].map((host) => (
+            <label className='pill' key={host}>
+              <Image
+                src={`/${host}.jpg`}
+                alt={`${host}'s image`}
+                width={25}
+                height={25}
+                className='avatar'
+              />
+              <input type='checkbox' name='host' value={host} />
+              {host}
+            </label>
+          ))}
+        </div>
 
         <button type='submit' disabled={isPending}>
           Submit
@@ -100,7 +111,12 @@ export default function HomePage() {
       {!isPending && podcast && (
         <div>
           <h2>{podcast?.title}</h2>
-
+          {!isPending && audioUrl && (
+            <div className='audio-container'>
+              <h2>Your Personal Podcast</h2>
+              <audio style={{ margin: '20px' }} controls src={audioUrl}></audio>
+            </div>
+          )}
           {podcast?.content?.map((message, index) => (
             <div className={`textbox ${message.host}`} key={index}>
               <Image
@@ -117,12 +133,6 @@ export default function HomePage() {
           ))}
 
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        </div>
-      )}
-      {!isPending && audioUrl && (
-        <div className='audio-container'>
-          <h2>Your Personal Podcast</h2>
-          <audio style={{ margin: '20px' }} controls src={audioUrl}></audio>
         </div>
       )}
       {isPending && (
