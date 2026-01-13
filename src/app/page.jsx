@@ -3,13 +3,15 @@ import Image from 'next/image';
 import SkeletonLoader from './components/SkeletonLoader';
 import LoadingText from './components/LoadingText';
 import { generatePodcast } from './actions';
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect } from 'react';
+// import client from '@/lib/contentful';
 
-export default function HomePage() {
+export default function Home() {
   const [isPending, startTransition] = useTransition();
   const [audioUrl, setAudioUrl] = useState(null);
   const [podcast, setPodcast] = useState();
   const [errorMessage, setErrorMessage] = useState('');
+  // const [assets, setAssets] = useState([]);
 
   const handleSubmit = async (formData) => {
     setPodcast(null);
@@ -88,21 +90,25 @@ export default function HomePage() {
           Choose Hosts:
         </label>
         <div className='pill-selector'>
-          {['Yorick', 'Jens', 'Fran', 'Mike'].map((host) => (
-            <label className={`pill ${host}`} key={host}>
-              <Image
-                src={`/${host}.jpg`}
-                alt={`${host}'s image`}
-                width={40}
-                height={40}
-                className='avatar'
-              />
-              <input type='checkbox' name='host' value={host} />
-              {host}
-            </label>
-          ))}
-        </div>
+          {['Yorick', 'Jens', 'Fran', 'Mike', 'Ayso', 'Adam'].map((host) => {
+            const isDisabled = ['Ayso','Adam'].includes(host);
+            return (
+              <label className={`pill ${host}`} key={host}>
+                {isDisabled && <span className='tooltip'>Coming Soon</span>}
+                <Image
+                  src={`/${host}.jpg`}
+                  alt={`${host}'s image`}
+                  width={40}
+                  height={40}
+                  className='avatar'
 
+                />
+                <input type='checkbox' name='host' value={host} disabled={isDisabled}/>
+                {host}
+              </label>
+            );
+          })}
+        </div>
         <button type='submit' disabled={isPending}>
           Submit
         </button>

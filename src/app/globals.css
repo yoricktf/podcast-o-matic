@@ -144,6 +144,57 @@ button {
   --pill-shadow: rgba(185, 134, 215, 0.6);
 }
 
+.pill.Ayso {
+  --pill-bg: rgb(246, 161, 50);
+  --pill-shadow: rgba(246, 161, 50, 0.6);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pill.Adam {
+  --pill-bg: rgb(246, 50, 191);
+  --pill-shadow: rgba(246, 50, 191, 0.6);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pill.Ayso .tooltip,
+.pill.Adam .tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  margin-bottom: 8px;
+  z-index: 10;
+}
+
+.pill.Ayso .tooltip::after,
+.pill.Adam .tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.pill.Ayso:hover .tooltip,
+.pill.Adam:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
 .pill:hover {
   background-color: color-mix(in srgb, var(--pill-bg) 60%, white);
   /* border-color: var(--pill-bg); */
@@ -164,7 +215,6 @@ button {
 
 audio {
   width: 90%;
-
   max-width: 600px;
 }
 
@@ -198,6 +248,18 @@ audio {
 
 .textbox.Jens {
   --pill-bg: rgb(185, 134, 215);
+  background-color: var(--pill-bg);
+  color: white;
+}
+
+.textbox.Ayso {
+  --pill-bg: rgb(246, 161, 50);
+  background-color: var(--pill-bg);
+  color: white;
+}
+
+.textbox.Adam {
+  --pill-bg: rgb(246, 50, 191);
   background-color: var(--pill-bg);
   color: white;
 }
