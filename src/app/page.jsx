@@ -11,6 +11,7 @@ export default function Home() {
   const [audioUrl, setAudioUrl] = useState(null);
   const [podcast, setPodcast] = useState();
   const [errorMessage, setErrorMessage] = useState('');
+  const [promptText, setPromptText] = useState('');
   // const [assets, setAssets] = useState([]);
 
   const handleSubmit = async (formData) => {
@@ -84,8 +85,12 @@ export default function Home() {
       </section>
 
       <form action={handleSubmit} style={{ margin: '0 auto' }}>
-        <input name='prompt' placeholder='Enter your prompt' />
-
+        <input
+          name='prompt'
+          placeholder='Enter your prompt'
+          value={promptText}
+          onChange={(e) => setPromptText(e.target.value)}
+        />
         <label htmlFor='host' className='pill-label'>
           Choose Hosts:
         </label>
@@ -109,9 +114,12 @@ export default function Home() {
             );
           })}
         </div>
-        <button type='submit' disabled={isPending}>
-          Submit
-        </button>
+        <div className='button-container'>
+          {!promptText.trim() && <span className='tooltip'>Enter a topic</span>}
+          <button type='submit' disabled={isPending || !promptText.trim()}>
+            Submit
+          </button>
+        </div>
       </form>
 
       {!isPending && podcast && (
