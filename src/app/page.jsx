@@ -73,12 +73,11 @@ export default function Home() {
         <h1 className='title'>Podcast-o-Matic</h1>
         <h3>🎙️✨ Instant Podcasts on Any Topic! 🎙️✨</h3>
         <p>
-          Meet Yorick, Mike, Jens and Fran, your AI-powered podcast hosts who
+          Meet Yorick, Mike, Jens, Fran and coming soon, Ayso and Adam, your AI-powered podcast hosts who
           are ready to tackle any topic you throw their way! Just enter a
           subject, and they’ll generate a fully scripted, engaging podcast
           episode—ready for you to read or listen to. Whether it’s deep dives
-          into history, tech trends, or the wildest conspiracy theories,Yorick,
-          Mike, Jens and Fran deliver entertaining and insightful discussions in
+          into history, tech trends, or the wildest conspiracy theories, they deliver entertaining and insightful discussions in
           seconds. 🚀 Instant. Custom. Unlimited (while Yorick has credits).
           What will you make them talk about next?
         </p>

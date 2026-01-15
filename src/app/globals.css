@@ -56,7 +56,6 @@ input {
 
 .message {
   text-align: left;
-
   margin: 0;
 }
 
@@ -73,6 +72,7 @@ button {
 .button-container {
   position: relative;
   display: inline-block;
+  margin-top: 15px;
 }
 
 .button-container .tooltip {
@@ -142,22 +142,6 @@ button {
   border: 2px solid transparent;
   transition: all 0.2s ease-in-out;
 }
-
-/* .pill {
-  position: relative;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  background-color: #f0f0f0;
-  color: #333;
-  font-size: 14px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.2s ease-in-out;
-} */
 
 .pill input[type='checkbox'] {
   display: none;
